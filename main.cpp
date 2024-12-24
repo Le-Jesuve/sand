@@ -50,7 +50,9 @@ int main(int argc, char **argv) {
             char chl = mvinch(col, row - 1) & A_CHARTEXT;
             char chr = mvinch(col, row + 1) & A_CHARTEXT;
             char chbl = mvinch(col + 1, row - 1) & A_CHARTEXT;
+            char chbll = mvinch(col + 1, row - 2) & A_CHARTEXT;
             char chbr = mvinch(col + 1, row + 1) & A_CHARTEXT;
+            char chbrr = mvinch(col + 1, row + 2) & A_CHARTEXT;
             if (chl == ' ' && chr == ' ' && chbl == ' ' && chbr == ' ') {
               if (r == 1) {
                 mvprintw(col, row, " ");
@@ -69,11 +71,20 @@ int main(int argc, char **argv) {
               mvprintw(col, row, " ");
               mvprintw(col + 1, row - 1, ".");
               refresh();
+            } else if (chbl == '.' && chbr == '.' && chbrr == ' ') {
+              mvprintw(col, row, " ");
+              mvprintw(col + 1, row + 2, ".");
+              refresh();
+            } else if (chbl == '.' && chbr == '.' && chbll == ' ') {
+              mvprintw(col, row, " ");
+              mvprintw(col + 1, row - 2, ".");
+              refresh();
             }
           }
         }
       }
     }
+    napms(10);
     refresh();
   }
   getch();
